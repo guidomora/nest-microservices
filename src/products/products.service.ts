@@ -59,12 +59,15 @@ export class ProductsService extends PrismaClient implements OnModuleInit {
   }
 
   async update(id: number, updateProductDto: UpdateProductDto) {
+    const {id: __, ...data} = updateProductDto
+
+
     // this makes a double call. also can be done with a trycatch
     await this.findOne(id)
 
     return this.product.update({
       where: { id, available:true },
-      data: updateProductDto
+      data
     })
   }
 
